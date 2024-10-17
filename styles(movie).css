@@ -1,0 +1,848 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --primary-color: #f39c12;
+    --secondary-color: #e67e22;
+    --dark-bg: #0c0101;
+    --light-bg: #0c0101;
+    --text-color: #fff;
+    --text-muted: #ccc;
+    --hover-color: #ffc107;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: var(--light-bg);
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: top 0.3s ease-in-out;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+/* Centering the heading */
+h2 {
+    text-align: relative;
+    font-size: 24px; /* Default size */
+    font-weight: bold;
+}
+
+/* Styling for the iframe container */
+.iframe-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-top: 20px;
+    height: 0;
+    overflow: hidden;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Smaller heading size on mobile */
+@media screen and (max-width: 768px) {
+    h2 {
+        font-size: 16px; /* Smaller size for mobile */
+    }
+}
+.side-menu-title {
+    margin-bottom: 20px; /* Space below the title */
+    font-size: 1.8rem; /* Adjust title size */
+    text-align: center; /* Center align the title */
+    color: #5275f5; /* Change title color if needed */
+}
+.menu-heading {
+    color: #5275f5;         /* Change the color (you can adjust this color as needed) */
+}
+/* Download Button */ 
+.expand-btn { 
+    padding: 12px 25px; 
+    background-color: rgb(18, 18, 19); 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 18px; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; 
+    position: relative; 
+    font-family: Arial, sans-serif; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+} 
+ 
+/* Arrow icon */ 
+.expand-btn .arrow-down { 
+    margin-left: 10px; 
+    transition: transform 0.3s ease; /* Smooth rotation */ 
+} 
+ 
+/* Rotate arrow on dropdown */ 
+.expand-btn.active .arrow-down { 
+    transform: rotate(180deg); /* Rotates the arrow */ 
+} 
+ 
+/* Dropdown container */ 
+.download-options { 
+    margin-top: 15px; 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.3s ease, opacity 0.3s ease; 
+    opacity: 0; 
+} 
+ 
+/* Visible dropdown */ 
+.download-options.active { 
+    max-height: 200px; /* Set to appropriate height for dropdown */
+    opacity: 1; 
+} 
+ 
+/* Download link styles */ 
+.download-btn {
+    display: block; /* Stack links vertically */
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 0; /* Adjust padding to match */
+    border-radius: 5px; /* Rounded corners */
+    transition: background 0.3s ease; /* Smooth transition */
+    width: 120px; /* Consistent width */
+    margin: 5px auto; /* Centered with spacing */
+    background-color: #333; /* Background for links */
+}
+
+/* Hover effect for download links */
+.download-btn:hover {
+    background-color: #555; /* Change background on hover */
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 600px) {
+    .expand-btn {
+        padding: 8px 15px; /* Smaller padding */
+        font-size: 16px; /* Smaller font size */
+    }
+
+    .download-btn {
+        padding: 8px 0; /* Smaller padding for mobile buttons */
+        font-size: 14px; /* Smaller font size */
+        width: 100px; /* Adjust width for mobile */
+    }
+}
+
+/* General Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 15px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    color: white;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for hiding/showing */
+}
+
+/* Hide navbar class */
+.navbar.hidden {
+    transform: translateY(-100%); /* Move the navbar out of view */
+}
+
+/* Centered Title */
+.navbar .title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    color: white;
+    white-space: nowrap;
+    z-index: 1002; /* Ensure it stays above other elements */
+}
+
+/* Side Menu Button (Hamburger) */
+.menu-toggle {
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+    z-index: 1001;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+/* Search Button and Search Bar Container */
+.search-container {
+    display: flex;
+    justify-content: center; /* Center the search button and bar */
+    align-items: center;
+    z-index: 1001;
+    position: relative;
+    transition: all 0.3s ease; 
+}
+
+/* Search Button */
+.search-container button {
+    background-color: #e9e3da;
+    color: #232020;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    z-index: 1001;
+}
+
+/* Search Input - starts small */
+.search-container input { 
+    padding: 10px; 
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    transition: width 0.5s ease, opacity 0.5s ease;
+    opacity: 0; /* Hidden by default */
+    width: 0; /* Collapsed state */
+    background-color: black; /* Black background for search bar */
+    color: white; /* White text inside the search bar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    transform-origin: right center;
+    margin: 0 auto; /* Center the search input */
+}
+
+/* When the search input is active */
+.search-container input.active {
+    opacity: 1; /* Fully visible when active */
+    width: 250px; /* Expanded width */
+}
+
+/* Expanded Search Input - Full width and centered on PC */
+.search-container input.expanded {
+    width: 80vw; /* 80% of viewport width to leave space for centering */
+    opacity: 1;
+    padding-left: 20px;
+    border-radius: 25px;
+    z-index: 9999;
+    position: fixed;
+    top: 15px; /* Slight gap from the top */
+    height: 40px;
+    margin: 0 auto; /* Center horizontally */
+    left: 0; 
+    right: 0;
+}
+
+/* Hide the expanded input initially */
+.search-container input.hidden {
+    display: none;
+}
+
+/* Side Menu */
+.side-menu {
+    position: relative;
+    z-index: 1000; /* Lower z-index than the search container */
+}
+
+/* Fix for mobile view - Ensures proper layout on small screens */
+@media (max-width: 768px) {
+    .search-container input.active {
+        width: 200px; /* Slightly smaller width on mobile */
+    }
+
+    /* Full-width expanded search for mobile */
+    .search-container input.expanded {
+        width: 90vw; /* Slightly reduced width for mobile */
+        padding-left: 15px;
+        top: 10px;
+        margin: 0 auto; /* Keep it centered on mobile */
+    }
+
+    .search-container button {
+        padding: 8px 16px;
+    }
+}
+
+/* Background blur when search is active */
+.blur-background {
+    filter: blur(2px); /* You can adjust the blur intensity */
+    transition: filter 0.3s ease;
+}
+
+/* Side navigation with transparency */
+#sideNav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow-x: hidden;
+    transition: width 0.5s ease;
+    padding-top: 60px;
+    backdrop-filter: blur(5px);
+}
+
+/* Close button (X) inside the sideNav */
+#sideNav .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style for the list items in side navigation */
+#sideNav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#sideNav ul li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Adds a light line between items */
+}
+
+#sideNav ul li a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: white;
+    display: block;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+#sideNav ul li a:hover {
+    background-color: #5275f5;
+    color: white;
+}
+/* Hide scrollbar */
+.side-menu::-webkit-scrollbar {
+    display: none;
+}
+.side-menu {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* When the sideNav is open */
+#sideNav.open {
+    width: 250px;
+}
+
+/* Optional: Remove the bottom border for the last item */
+#sideNav ul li:last-child {
+    border-bottom: none;
+}
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    /* Adjust title size for mobile */
+    .navbar .title {
+        font-size: 1.5rem;
+    }
+
+    /* Search container input expands to full width on mobile */
+    .search-container input.expanded {
+        width: calc(100% - 40px); /* Full width minus padding */
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 40px;
+    }
+
+    /* Adjust hamburger button */
+    .menu-toggle {
+        font-size: 1.5rem;
+    }
+}
+
+/* Hide toggle button when side menu is open */
+.menu-toggle.hidden {
+    display: none;
+}
+
+/* Search input should cover full width on mobile */
+@media (max-width: 768px) {
+    .search-container input.expanded {
+        width: 90vw;
+    }
+}
+
+/* Style the scroll-to-top button */
+.scroll-to-top {
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    width: 60px;  /* Adjust the size of the button */ 
+    height: 60px; 
+    background-color: #e6e6e6;  /* Light grey background */ 
+    color: #000;  /* Black arrow */ 
+    border-radius: 50%;  /* Circular shape */ 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow around the button */ 
+    z-index: 1000;  /* Keep it on top */ 
+    border: none;  /* Ensure no border */ 
+    padding: 0;  /* Remove any extra padding */ 
+    margin: 0;    /* Remove any extra margin */ 
+    display: none;  /* Hidden by default */ 
+    opacity: 0; /* Start hidden with opacity */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth opacity and transform transitions */
+  }
+  
+  /* Show the button when scrolling down */
+  .show {
+    display: flex;
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Start position */
+  }
+  
+  /* Animation when the button is shown */
+  .scroll-to-top.show {
+    transform: translateY(-10px); /* Slightly move up */
+  }
+  
+  /* Arrow icon */
+  .arrow-icon {
+    width: 24px;  /* Arrow width */
+    height: 24px; /* Arrow height */
+    transform: rotate(180deg);  /* Reverse arrow to point upward */
+    transition: transform 0.3s ease; /* Smooth transition for arrow */
+  }
+  
+  /* Hover effect */
+  .scroll-to-top:hover {
+    background-color: #ccc; /* Darker grey on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  
+  .scroll-to-top:hover .arrow-icon {
+    transform: rotate(180deg) scale(1.1); /* Slight zoom effect on hover */
+  }
+  
+
+/* Main slider container */
+.movie-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center align the content */
+    width: 100%; 
+    overflow: hidden; 
+    position: relative; 
+    background-color: black; 
+    padding: 0; /* Remove padding to fit the poster exactly */
+    height: auto; /* Adjust height based on content */
+}
+
+/* Wrapper to hide overflowing content */
+.slider-wrapper { 
+    overflow: hidden;
+    width: 100%; /* Full width for the slider wrapper */
+}
+
+/* Container for the movie posters */
+.slider-container {
+    display: flex;
+    gap: 0; /* Remove gap between posters to fit them exactly */
+    width: 100%; /* Ensures the container stretches to fit the screen width */
+    transition: transform 0.5s ease;
+}
+
+/* Individual movie posters */
+.movie-poster {
+    flex-shrink: 0;
+    width: 70vw; /* Full viewport width for each poster */
+    height: auto; /* Adjust height based on aspect ratio */
+    max-height: 70vh; /* Ensure the poster doesn't exceed the viewport height */
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Dot indicators container */
+.dots-container {
+    position: absolute;
+    bottom: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px; /* Spacing between dots */
+}
+
+/* Individual dot */
+.dot {
+    width: 10px; /* Size of the dots */
+    height: 10px; /* Size of the dots */
+    background-color: rgba(255, 255, 255, 0.5); /* Color of the dots */
+    border-radius: 50%; /* Make dots circular */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Active dot */
+.dot.active {
+    background-color: rgba(255, 255, 255, 1); /* Color of the active dot */
+}
+/* Main slider container */
+.movie-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center items horizontally */
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: black;
+    padding: 20px;
+    height: 200px; /* Adjust the height to fit poster size */
+}
+
+/* Wrapper to hide overflowing content */
+.slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Container for the movie posters */
+.slider-container {
+    display: flex;
+    gap: 0; /* No gap between posters */
+    transition: transform 0.5s ease;
+}
+
+/* Individual movie posters */
+.movie-poster {
+    flex-shrink: 0;
+    width: 500px; /* Ensure the width is 500px or more */
+    height: 200px; /* Ensure the height is 200px */
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Navigation dots */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 10px; /* Position at the bottom of the slider */
+    width: 100%;
+    z-index: 1000;
+}
+
+.slider-dot {
+    background-color: white; /* Color of the dots */
+    border-radius: 50%;
+    width: 10px; /* Size of the dots */
+    height: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.slider-dot.active {
+    background-color: #f39c12; /* Color for the active dot */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .movie-slider {
+        height: auto; /* Allow height to adjust based on content */
+        padding: 10px;
+    }
+    .movie-poster {
+        width: 100vw; /* Full width of the viewport */
+        height: auto; /* Adjust height based on the width */
+    }
+    .slider-dots {
+        bottom: 5px; /* Adjust dot position for smaller screens */
+    }
+    .slider-dot {
+        width: 8px; /* Smaller dots for mobile */
+        height: 8px;
+    }
+}
+
+/* Hide slider navigation buttons */
+.slider-prev,
+.slider-next {
+    display: none; /* Hides the navigation arrows */
+}
+
+/* Slider container styling */
+.movie-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center align items */
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: black;
+    padding: 20px;
+    height: 300px; /* Height of the slider */
+}
+
+/* Wrapper to hide overflowing content */
+.slider-wrapper {
+    overflow: hidden;
+    width: 100%; /* Full width for no blank spaces */
+}
+
+/* Container for the movie posters */
+.slider-container {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+}
+
+/* Individual movie posters */
+.movie-poster {
+    flex-shrink: 0;
+    width: 100vw; /* Each poster should fit the viewport width */
+    height: 300px; /* Adjust height as needed */
+    overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .movie-poster {
+        width: 100vw; /* Full width on mobile */
+        height: 200px; /* Adjust height for mobile */
+    }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .movie-slider {
+        padding: 0; /* Remove padding on mobile */
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    .movie-poster {
+        width: 100vw; /* Full viewport width for each poster */
+        height: auto; /* Adjust height based on aspect ratio */
+    }
+
+    .dots-container {
+        bottom: 10px; /* Adjust position of dots on mobile */
+    }
+
+    .dot {
+        width: 8px; /* Smaller dots on mobile */
+        height: 8px; /* Smaller dots on mobile */
+    }
+}
+
+
+
+/* Main Section Adjustments */
+main {
+    padding-top: 80px; /* Adjusted padding to account for header height */
+}
+
+/* "Sort by" Section */
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 20px 60px 20px;
+}
+
+.controls label {
+    margin-right: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.controls select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    border: 1px solid #0e0e0e;
+    border-radius: 4px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.controls select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #0e0e0e;
+}
+
+.controls select:hover {
+    cursor: pointer;
+}
+
+/* Section with Horizontal Scrolling */
+section {
+    margin: 20px 0;
+}
+
+.movies-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.movies-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* Movie card container */
+.movie-card {
+    position: relative; /* Ensure child elements can be positioned absolutely */
+    text-align: center;
+    background-color: var(--light-bg);
+    border-radius: 10px; 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    flex: 0 0 auto; 
+    scroll-snap-align: start;
+    width: 200px;
+    margin: 0;
+}
+
+/* Movie poster image */
+.movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Match card radius for a cohesive look */
+}
+
+/* Play button overlay */
+.movie-card::before {
+    content: '\f04b'; /* Font Awesome play icon code */
+    font-family: "Font Awesome 5 Free"; /* Ensure this matches your Font Awesome version */
+    font-weight: 900; /* Adjust based on the icon's weight */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the icon */
+    font-size: 3rem; /* Adjust size as needed */
+    color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth transition */
+    pointer-events: none; /* Prevent mouse events on the pseudo-element */
+}
+
+/* Show play button on hover */
+.movie-card:hover::before {
+    opacity: 1; /* Show on hover */
+}
+
+/* Make the entire card clickable */
+.movie-card:hover,
+.movie-card:focus {
+    cursor: pointer; /* Change cursor to indicate clickable */
+    transform: scale(1.07);
+    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Play button as a clickable area */
+.movie-card:hover {
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.movie-card h3 {
+    margin: 10px 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.movie-card p {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+/* For mobile screens */
+.movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.movie-card {
+    flex: 0 0 100%;
+    margin-bottom: 10px; 
+}
+
+@media (min-width: 360px) {
+    .movie-card {
+        flex: 0 0 48%;
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .movie-card {
+        flex: 0 0 30%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .movie-card {
+        flex: 0 0 23%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .movie-card {
+        flex: 0 0 20%;
+        margin-bottom: 40px;
+    }
+}
